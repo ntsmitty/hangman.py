@@ -7,7 +7,6 @@ class Hangman(object):
     secret_word = Counter(getword_mod.get_word())
     print secret_word
     
-    #correct_guesses should not exceed the length of the secret_word, when it is equal - you win.
     def __init__(self):
         self.used_letters = ' '
         self.correct_guesses = 0
