@@ -19,7 +19,6 @@ class Hangman(object):
         return self.user_guess
 
     def validate_user_guess(self):
-        print 'we here dawg'
         if self.user_guess in self.secret_word and self.user_guess not in self.used_letters:
             self.correct_guesses += self.secret_word[self.user_guess]
             self.used_letters += ' '.join(self.user_guess)
@@ -29,7 +28,6 @@ class Hangman(object):
         #return self.correct_guesses - took this out and wokred, why?
 
     def win_game(self):
-        print 'We good'
         while self.correct_guesses < sum(self.secret_word.values()):
             if self.bad_guesses == 6:
                 print 'You Lose'
