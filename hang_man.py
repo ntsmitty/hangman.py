@@ -1,42 +1,94 @@
 from collections import Counter
-import getword_mod
+import get_random_word
 
 
 class Hangman(object):
 
-    secret_word = Counter(getword_mod.get_word())
-    #print secret_word
+    secret_word = Counter(get_random_word.get_word())
+    print secret_word
 
     def __init__(self):
         self.used_letters = ' '
         self.correct_guesses = 0
         self.bad_guesses = 0
 
-    def get_used_guess(self):
-        self.user_guess = raw_input('Please enter letter: ')
-        #print self.correct_guesses
-        #print self.secret_word[self.user_guess]
-        return self.user_guess
+    def get_user_guess(self):
+        while True:
+            self.user_guess = raw_input('Give a guess and hope for the best..: ')
+            if len(self.user_guess) > 1 and not self.user_guess.al:
+                print 'One letter at a time fool'
+            else:
+                break
 
-    def validate_user_guess(self):
+    def check_user_guess(self):
         if self.user_guess in self.secret_word and self.user_guess not in self.used_letters:
             self.correct_guesses += self.secret_word[self.user_guess]
             self.used_letters += ' '.join(self.user_guess)
+            self.play_game()
         elif self.user_guess not in self.secret_word:
             self.bad_guesses += 1
             self.used_letters += ' '.join(self.user_guess)
-        #return self.correct_guesses - took this out and wokred, why?
+            self.hangman_image()
+        elif self.user_guess in self.used_letters:
+            print 'You tryna playin me sucka?'
+            self.get_user_guess()
+        #return self.correct_guesses - took this out and it added the values to correct_guesses, why?
 
-    def win_game(self):
+    def hangman_image(self):
+        if self.bad_guesses == 1:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |           "
+            print    "   |           "
+            print    "   |           "
+            print    "   |_________  "
+
+        elif self.bad_guesses == 2:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |      |    "
+            print    "   |           "
+            print    "   |           "
+            print    "   |_________  "
+
+        elif self.bad_guesses == 3:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |     /|    "
+            print    "   |           "
+            print    "   |           "
+            print    "   |_________  "
+        elif self.bad_guesses ==  4:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |     /|\   "
+            print    "   |           "
+            print    "   |           "
+            print    "   |_________  "
+        elif self.bad_guesses == 5:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |     /|\   "
+            print    "   |     /     "
+            print    "   |           "
+            print    "   |_________  "
+
+        elif self.bad_guesses == 6:
+            print    "   |-----|     "
+            print    "   |      0    "
+            print    "   |     /|\   "
+            print    "   |     / \   "
+            print    "   |           "
+            print    "   |_________  "
+            print 'you dead fool'
+            exit()
+
+    def play_game(self):
         while self.correct_guesses < sum(self.secret_word.values()):
-            if self.bad_guesses == 6:
-                print 'You Lose'
-                break
-            else:
-                #print self.correct_guesses
-                self.get_used_guess()
-                self.validate_user_guess()
+                self.get_user_guess()
+                self.check_user_guess()
+        print 'You win muthasucka!'
 
 
 game = Hangman()
-game.win_game()
+game.play_game()
