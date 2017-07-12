@@ -15,7 +15,7 @@ class Hangman(object):
     def get_user_guess(self):
         while True:
             self.user_guess = raw_input('Give a guess and hope for the best..: ')
-            if len(self.user_guess) > 1 and not self.user_guess.al:
+            if len(self.user_guess) > 1:
                 print 'One letter at a time fool'
             else:
                 break
