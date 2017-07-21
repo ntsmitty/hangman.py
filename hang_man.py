@@ -20,7 +20,7 @@ class Hangman(object):
             if len(self.user_guess) <= 1 and self.user_guess.isalpha():
                 return self.user_guess
             else:
-                print 'Try again sucka ass!'
+                print 'Try again sucka'
                 self.get_user_guess()
 
     def check_user_guess(self):
@@ -33,7 +33,7 @@ class Hangman(object):
             self.used_letters += ' '.join(self.user_guess)
             self.hangman_image()
         elif self.user_guess in self.used_letters:
-            print 'You tryna playin me sucka?'
+            print 'ANOTHA ONE!?'
             self.get_user_guess()
 
     def hangman_image(self):
@@ -82,14 +82,14 @@ class Hangman(object):
             print    "   |     / \   "
             print    "   |           "
             print    "   |_________  "
-            print 'you dead fool'
+            print 'you dead'
             exit()
 
     def win_game(self):
         while self.correct_guesses < sum(self.secret_word.values()):
                 self.get_user_guess()
                 self.check_user_guess()
-        print 'You win muthasucka!'
+        print 'I guess you can live!'
 
 game = Hangman()
 game.win_game()
